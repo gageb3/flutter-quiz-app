@@ -15,16 +15,17 @@ class Quiz extends StatefulWidget {
 }
 
 class _QuizState extends State<Quiz> {
-  List<String> selectedAnswers = []; // Store all user-selected answers
+  List<String> _selectedAnswers = []; // Store all user-selected answers
   var activeScreen = 'start-screen';       // Track which screen to show
 
   // Called when user selects an answer
   void chooseAnswer(String answer){
-    selectedAnswers.add(answer); // Add answer to list
+    _selectedAnswers.add(answer); // Add answer to list
 
-    if (selectedAnswers.length == questions.length) {
+    if (_selectedAnswers.length == questions.length) {
       setState(() {
-        selectedAnswers = [];
+
+        // selectedAnswers = [];
         activeScreen = 'results-screen';
       });
     }
@@ -45,7 +46,7 @@ class _QuizState extends State<Quiz> {
       screenWidget = QuestionsScreen(onSelectAnswer: chooseAnswer);
     }
     if (activeScreen == 'results-screen'){
-      screenWidget = ResultsScreen(chosenAnswers: selectedAnswers);
+      screenWidget = ResultsScreen(chosenAnswers: _selectedAnswers);
     }
     return MaterialApp(
       home: Scaffold(
