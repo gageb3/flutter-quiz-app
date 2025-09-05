@@ -17,7 +17,12 @@ class Quiz extends StatefulWidget {
 class _QuizState extends State<Quiz> {
   // This variable tracks which screen should currently be shown.
   // It starts with the StartScreen widget.
+  final List<String> selectedAnswers = [];
   var activeScreen = 'start-screen';
+
+  void chooseAnswer(String answer){
+    selectedAnswers.add(answer);
+  }
 
   // @override
   // void initState() {
@@ -41,7 +46,7 @@ class _QuizState extends State<Quiz> {
     Widget screenWidget = StartScreen(switchScreen);
 
     if (activeScreen == 'questions-screen') {
-      screenWidget = const QuestionsScreen();
+      screenWidget = QuestionsScreen(onSelectAnswer: chooseAnswer);
     }
     
 
